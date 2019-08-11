@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
+
 
 /**
  * @author Dyson
@@ -34,27 +36,23 @@ public class LoginController {
 
     @RequestMapping("/do_login")
     @ResponseBody
-    public Result<Boolean> doLogin(LoginVo loginVo){
+    public Result<Boolean> doLogin(@Valid LoginVo loginVo){
         log.info(loginVo.toString());
         //参数校验
-        String passInput = loginVo.getPassword();
-        String mobile = loginVo.getMobile();
-        if(StringUtils.isEmpty(passInput)){
-            return Result.error(CodeMsg.PASSWORD_EMPTY);
-        }
-        if(StringUtils.isEmpty(mobile)){
-            return Result.error(CodeMsg.MOBILE_EMPTY);
-        }
-        if(!VaildatorUtil.isMobile(mobile)){
-            return Result.error(CodeMsg.MOBILE_ERROR);
-        }
+//        String passInput = loginVo.getPassword();
+//        String mobile = loginVo.getMobile();
+//        if(StringUtils.isEmpty(passInput)){
+//            return Result.error(CodeMsg.PASSWORD_EMPTY);
+//        }
+//        if(StringUtils.isEmpty(mobile)){
+//            return Result.error(CodeMsg.MOBILE_EMPTY);
+//        }
+//        if(!VaildatorUtil.isMobile(mobile)){
+//            return Result.error(CodeMsg.MOBILE_ERROR);
+//        }
         //登录
-        CodeMsg codeMsg = userService.login(loginVo);
-        if(codeMsg.getCode()==0){
-            return Result.success(true);
-        }else {
-            return Result.error(codeMsg);
-        }
+        Boolean ret = userService.login(loginVo);
+        return Result.success(true);
     }
 
 
