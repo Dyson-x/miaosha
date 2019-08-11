@@ -72,6 +72,7 @@
       <version>3.6</version>
     </dependency>
 
+    <!--引入明文所需要的依赖-->
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
